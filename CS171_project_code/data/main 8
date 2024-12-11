@@ -1,0 +1,126 @@
+class Node {
+    String data;
+    Node next;
+    
+    Node(String data) {
+    this.data = data;
+    this.next = null;
+    }
+    }
+    
+    
+    class LinkedList {
+    Node head; // Head of the list
+    
+    //add a node at the end of the list
+    void add(String data) {
+    Node newNode = new Node(data);
+    if (head == null) {
+    head = newNode;
+    } else {
+    Node temp = head;
+    while (temp.next != null) {
+    temp = temp.next;
+    }
+    temp.next = newNode;
+    }
+    }
+    
+    // last node points to the first node
+    void createLoop() {
+    if (head == null) return;
+    
+    Node temp = head;
+    while (temp.next != null) {
+    temp = temp.next;
+    }
+    temp.next = head;
+    }
+    
+    // detect the loop and return the node causing the loop
+    Node findLoopNode() {
+    Node slow = head, fast = head;
+    
+    
+    while (fast != null && fast.next != null) {
+    slow = slow.next;
+    fast = fast.next.next;
+    
+    if (slow == fast) { // Loop detected
+    break;
+    }
+    }
+    
+    // If no loop is found, return null
+    if (fast == null || fast.next == null) {
+    return null;
+    }
+    
+    // Step 2: Find the start of the loop
+    slow = head;
+    while (slow != fast) {
+    slow = slow.next;
+    fast = fast.next;
+    }
+    
+    return slow; // The node where slow and fast meet is the loop's start
+    }
+    
+    // Function to display the loop-causing node's data
+    void displayLoopNode() {
+    Node loopNode = ();
+    if (loopNode != null) {
+    System.out.println("Loop detected at node with data: " + loopNode.data);
+    } else {
+    System.out.println("No loop detected in the linked list.");
+    }
+    }
+    
+    
+    void printList() {
+    Node temp = head;
+    Node loopNode = findLoopNode();
+    
+    
+    if (loopNode == null) {
+    // No loop, print normally
+    while (temp != null) {
+    System.out.print(temp.data + " > ");
+    temp = temp.next;
+    }
+    System.out.println("null");
+    } else {
+    
+    do {
+    System.out.print(temp.data + " > ");
+    temp = temp.next;
+    } while (temp != loopNode);
+    System.out.println(loopNode.data);
+    }
+    }
+    }
+    
+    //Main class to test the linked list and loop detection
+    public class main 8 {
+    public static void main(String[] args) {
+    LinkedList list = new LinkedList();
+    
+    // Add nodes to the list
+    list.add("Node 1");
+    list.add("Node 2");
+    list.add("Node 3");
+    list.add("Node 4");
+    list.add("Node 5");
+    
+    
+    list.createLoop();
+    
+    
+    list.displayLoopNode();
+    
+    
+    list.printList();
+    }
+    }
+    
+    
